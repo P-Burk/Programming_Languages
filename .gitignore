@@ -3,4 +3,4 @@
 .vscode/settings.json
 .vscode/tasks.json
 code_pad.cpp
-code_pad.exe
+*.exe
