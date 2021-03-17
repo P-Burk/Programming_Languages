@@ -72,20 +72,20 @@ int main() {
         cin >> userSelection;
 
         switch (userSelection) {
-        case 1:                         // adds one hour
-            startNumber += 3600;
-            break;
-        case 2:                         // adds one minute
-            startNumber += 60;
-            break;
-        case 3:                         // adds one second
-            startNumber++;
-            break;
-        case 4:                         // exits program
-            cout << "Goodbye" << endl;
-            return 0;
-        default:
-            break;
+            case 1:                         // adds one hour
+                startNumber += 3600;
+                break;
+            case 2:                         // adds one minute
+                startNumber += 60;
+                break;
+            case 3:                         // adds one second
+                startNumber++;
+                break;
+            case 4:                         // exits program
+                cout << "Goodbye" << endl;
+                return 0;
+            default:
+                break;
         }
 
     TimeCalc(startNumber, totalHours, totalMinutes, totalSeconds);
