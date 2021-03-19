@@ -20,13 +20,10 @@ void TimeDisplay (int hours, int minutes, int seconds) {
     printf("*      %s     *", "12-Hour Clock"), cout << "    ";                                             // 12-hr clock header
     printf("*      %s     *", "24-Hour Clock"), cout << endl;                                               // 24-hr clock header
 
-    // if/else branch based on whether hours is divisible by 12 to determine AM or PM for 12-hr clock
-    if (hours == 12) {
-        printf("*      %02d:%02d:%02d %s      *", hours, minutes, seconds, "P M"), cout << "    ";          // handles PM time when hours is exactly 12
-    } 
-    else if (hours / 12 != 0) {      
-        printf("*      %02d:%02d:%02d %s      *", (hours - 12), minutes, seconds, "P M"), cout << "    ";   // subtract 12 from hours to get PM time
-    }                                                                                                      
+    // if/else branch based on whether hours is > or = 12 in order to determine AM or PM for 12-hr clock
+    if (hours >= 12) {
+        printf("*      %02d:%02d:%02d %s      *", hours, minutes, seconds, "P M"), cout << "    ";          // handles PM time when hours is >= 12
+    }                                                                                                       
     else {
         printf("*      %02d:%02d:%02d %s      *", hours, minutes, seconds, "A M"), cout << "    ";          // 12-hr AM time
     }
