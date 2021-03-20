@@ -1,6 +1,7 @@
 /*
 * Name: Preston Burkhardt
 * Class: CS-210 Programming Languanges
+* Project 1: 12/24 Hour Clock
 * Southern New Hampshire University
 */
 
@@ -14,7 +15,7 @@ using namespace std;
 const int secondsInOneDay = 86400;
 
 
-// outputs the time display. Takes hours, minutes, and seconds as arguements
+// outputs the time display. Takes hours, minutes, and seconds as arguements to fill out clocks
 void TimeDisplay (int hours, int minutes, int seconds) {
     cout << setw(26) << setfill('*') << "*" << "    " << setw(26) << setfill('*') << "*" << endl;           // asterisk line
     printf("*      %s     *", "12-Hour Clock"), cout << "    ";                                             // 12-hr clock header
@@ -22,13 +23,13 @@ void TimeDisplay (int hours, int minutes, int seconds) {
 
     // if/else branch based on whether hours is > or = 12 in order to determine AM or PM for 12-hr clock
     if (hours >= 12) {
-        printf("*      %02d:%02d:%02d %s      *", hours, minutes, seconds, "P M"), cout << "    ";          // handles PM time when hours is >= 12
+        printf("*      %02d:%02d:%02d %s      *", hours, minutes, seconds, "P M"), cout << "    ";          // 12-hr PM time
     }                                                                                                       
     else {
         printf("*      %02d:%02d:%02d %s      *", hours, minutes, seconds, "A M"), cout << "    ";          // 12-hr AM time
     }
 
-    printf("*        %02d:%02d:%02d        *", hours, minutes, seconds), cout << endl;                      // 24-hr clock 
+    printf("*        %02d:%02d:%02d        *", hours, minutes, seconds), cout << endl;                      // 24-hr time 
     cout << setw(26) << setfill('*') << "*" << "    " << setw(26) << setfill('*') << "*" << endl;           // asterisk line
 }
 
@@ -43,7 +44,8 @@ void MenuDisplay() {
 }
 
 // calculates hrs, min, and sec. 
-// takes total seconds in and passes hrs/min/sec out by reference 
+// takes total seconds in and passes hrs/min/sec out by reference to be used in timeDisplay()
+// secondsInOut is also passed out by reference in order for the program to keep track of the total seconds to allow future time calculations
 void TimeCalc(int& secondsInOut, int &hrsOut, int &minOut, int &secOut) {
     // if and nested if/else statements handle the rollover of the clock for times > 23:59:59
     if (secondsInOut >= secondsInOneDay) {
@@ -68,13 +70,13 @@ int main() {
     int totalMinutes = 0;
     int totalSeconds = 0;
     int userSelection = 0;
-    int startNumber;
+    int startSeconds;           // all time is based off of calulations performed with/on startSeconds
 
     // gets current time EST via finding the remainder of (epoch seconds - 4hrs) / total seconds in a day
-    startNumber = (time(0) - 14400) % secondsInOneDay;
+    startSeconds = (time(0) - 14400) % secondsInOneDay;
 
     // calculate time and output both displays
-    TimeCalc(startNumber, totalHours, totalMinutes, totalSeconds);
+    TimeCalc(startSeconds, totalHours, totalMinutes, totalSeconds);
     TimeDisplay(totalHours, totalMinutes, totalSeconds);
     MenuDisplay();
 
@@ -85,13 +87,13 @@ int main() {
         // switch statement to handle option choice branches
         switch (userSelection) {
             case 1:                         // adds one hour
-                startNumber += 3600;
+                startSeconds += 3600;
                 break;
             case 2:                         // adds one minute
-                startNumber += 60;
+                startSeconds += 60;
                 break;
             case 3:                         // adds one second
-                startNumber++;
+                startSeconds++;
                 break;
             case 4:                         // exits program
                 cout << "Goodbye" << endl;
@@ -100,8 +102,8 @@ int main() {
                 break;
         }
 
-    // once user chooses option, calculate time with new startNumber and output both displays
-    TimeCalc(startNumber, totalHours, totalMinutes, totalSeconds);
+    // once user chooses option, calculate time with new startSeconds and output both displays
+    TimeCalc(startSeconds, totalHours, totalMinutes, totalSeconds);
     TimeDisplay(totalHours, totalMinutes, totalSeconds);
     MenuDisplay();
     }
