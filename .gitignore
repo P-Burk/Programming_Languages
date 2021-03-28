@@ -1,3 +1,6 @@
 .vscode/*
 code_pad.cpp
 *.exe
+/CS_210
+*.json
+.vs
