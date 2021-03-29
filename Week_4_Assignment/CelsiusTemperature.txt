@@ -1,0 +1,6 @@
+Toronto 8.33333
+Lima 18.8889
+Istanbul 13.8889
+Lagos 27.2222
+Shanghai 16.1111
+Sydney 17.7778
