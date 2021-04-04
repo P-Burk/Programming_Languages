@@ -26,7 +26,7 @@ void DisplayMenu::populatedMenu(double t_investAmt, double t_monthDeposit, doubl
     cout << "Monthly Deposit: $" << t_monthDeposit << endl;
     cout << "Annual Interest: %" << t_interestRate <<endl;
     cout << "Number of Years: " << t_years << endl;
-    cout << "Press any key to continue or \"q\" to quit. . . " << endl;
+    cout << "Are these values correct? (y/n) " << endl;
     cout << setw(46) << setfill('*') << "*" << endl;
 }
 
