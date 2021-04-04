@@ -13,9 +13,8 @@
 #include <iomanip>
 #include <limits>   // needed for streamsize parameter in cin.ignore()
 
-
-#include "UserCalc.h"
-//#include "DisplayMenu.h"
+// includes UserCalc class definition, which also has the DisplayMenu class definition
+#include "UserCalc.h"   
 
 using namespace std;
 
@@ -39,7 +38,9 @@ int main() {
         return 0;
     }
 
-    // loops through gathering user input that is used to calculate compounding interest accounts
+    // loops through gathering user input that is used to calculate compounding interest accounts, 
+    // outputs populated menu which also asks for user confirmation to continue. If user continues,
+    // outputs two tables with compounding interest calculations based off of the user's input numbers.
     while (userSelection != 'q') {
         cout << "Enter the initial investment amount: $ ";
         cin >> userInitialInvestAmt;
@@ -55,9 +56,8 @@ int main() {
 
         cout << endl;
 
+        // output the main display with user data populated in the correct fields
         newDisplay.populatedMenu(userInitialInvestAmt, userMonthlyDeposit, userAnnualInterest, userNumOfYrs);
-
-        
         cin >> userSelection;   // user input based on the question of whether their input is correct
 
         // while loop to catch any entries that aren't 'y' or 'n'
@@ -81,8 +81,10 @@ int main() {
             cin >> userNumOfYrs;
 
             cout << endl;
+
+            // output the main display with user data populated in the correct fields
             newDisplay.populatedMenu(userInitialInvestAmt, userMonthlyDeposit, userAnnualInterest, userNumOfYrs);
-            cin >> userSelection;
+            cin >> userSelection;   // user input based on the question of whether their input is correct
 
             // breaks out of while loop if the user selects 'y' to confirm their input values
             if (userSelection == 'y') {

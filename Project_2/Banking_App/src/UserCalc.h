@@ -4,6 +4,7 @@
 #define BANKING_APP_SRC_USERCALC_H
 #include <iostream>
 
+// includes DisplayMenu class definition
 #include "DisplayMenu.h"
 
 using namespace std;
