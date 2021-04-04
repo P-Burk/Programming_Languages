@@ -1,3 +1,5 @@
+// DisplayMenu class definition
+
 #ifndef BANKING_APP_SRC_DISPLAY_H
 #define BBANKING_APP_SRC_DISPLAY_H
 
