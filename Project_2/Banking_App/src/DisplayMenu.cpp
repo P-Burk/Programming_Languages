@@ -22,9 +22,9 @@ void DisplayMenu::emptyMenu() {
 void DisplayMenu::populatedMenu(double t_investAmt, double t_monthDeposit, double t_interestRate, int t_years) {
     cout << setw(46) << setfill('*') << "*" << endl;
     printf("**************** %s ******************", "Data Input"), cout << endl;
-    cout << "Initial Investement Amount: $" << t_investAmt << endl;
-    cout << "Monthly Deposit: $" << t_monthDeposit << endl;
-    cout << "Annual Interest: %" << t_interestRate <<endl;
+    cout << "Initial Investement Amount: $ " << t_investAmt << endl;
+    cout << "Monthly Deposit: $ " << t_monthDeposit << endl;
+    cout << "Annual Interest: % " << t_interestRate <<endl;
     cout << "Number of Years: " << t_years << endl;
     cout << "Are these values correct? (y/n) " << endl;
     cout << setw(46) << setfill('*') << "*" << endl;
@@ -50,7 +50,9 @@ void DisplayMenu::monthlyDepositOutputHeader() {
 
 // outputs the body of the compounding interest tables
 void DisplayMenu::depositOutputBody(int t_year, double t_yearEndBalance, double t_yearEndInterest) {
-    printf("    %d              $%.2f                   $%.2f",t_year, t_yearEndBalance, t_yearEndInterest);
+    cout << setw(5) << setfill(' ') << t_year << "\t";
+    cout << setw(11) << setfill(' ') << ' '; printf("$%.2f", t_yearEndBalance); cout << "\t\t";
+    cout << setw(4) << setfill(' ') << ' '; printf("$%.2f", t_yearEndInterest);
     cout << endl;
 }
 
