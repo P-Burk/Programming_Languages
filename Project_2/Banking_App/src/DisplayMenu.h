@@ -3,13 +3,12 @@
 
 class DisplayMenu {
     public:
-        void testFunction();
         void emptyMenu();
-        void populatedMenu();
-        void setInvestAmt(double t_invAmount) {m_initInvestAmt = t_invAmount;};
-        void setMonthDeposit(double t_depAmt) {m_monthDeposit = t_depAmt;};
-        void setAnnualInterest(double t_interestAmt) {m_annualInterest = t_interestAmt;};
-        void setNumYears(int t_years) {m_numYears = t_years;};
+        void populatedMenu(double t_investAmt, double t_monthDeposit, double t_interestRate, int t_years);
+        void noDepositOutputHeader();
+        void monthlyDepositOutputHeader();
+        void depositOutputFooter();
+        void depositOutputBody(int t_year, double t_yearEndBalance, double t_yearEndInterest);
         
     private:
         double m_initInvestAmt;

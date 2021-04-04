@@ -14,7 +14,7 @@
 
 
 #include "UserCalc.h"
-#include "DisplayMenu.h"
+//#include "DisplayMenu.h"
 
 using namespace std;
 
@@ -32,7 +32,7 @@ int main() {
 
     newDisplay.emptyMenu();
     cin >> userSelection;
-
+    
     if (userSelection == 'q') {
         cout << "Goodbye." << endl;
         return 0;
@@ -41,28 +41,29 @@ int main() {
     while (userSelection != 'q') {
         cout << "Enter the initial investment amount: $ ";
         cin >> userInitialInvestAmt;
-        newDisplay.setInvestAmt(userInitialInvestAmt);
 
         cout << "Enter the monthly deposit amout: $ ";
         cin >> userMonthlyDeposit;
-        newDisplay.setMonthDeposit(userMonthlyDeposit);
 
         cout << "Enter the annual interest rate: % ";
         cin >> userAnnualInterest;
-        newDisplay.setAnnualInterest(userAnnualInterest);
 
         cout << "Enter the number of years: ";
         cin >> userNumOfYrs;
-        newDisplay.setNumYears(userNumOfYrs);
+
+        cout << endl;
 
         auto User1 = std::make_unique<UserCalc>(userNumOfYrs, userInitialInvestAmt, userMonthlyDeposit, userAnnualInterest);
-        User1->getInitialInvestment();
-        User1->getMonths();
-        User1->getInterestAmount();
-        User1->getMonths();
 
-        newDisplay.populatedMenu();
+        newDisplay.populatedMenu(userInitialInvestAmt, userMonthlyDeposit, userAnnualInterest, userNumOfYrs);
+
         cin >> userSelection;
+        if (userSelection == 'q') {
+            cout << "Goodbye." << endl;
+            return 0;
+        }
+
+        User1->getCalcOutput();
     }
 
 
