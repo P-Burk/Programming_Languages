@@ -7,6 +7,7 @@
 
 #include <cstdio>
 #include <iostream>
+#include <ostream>
 #include <stdio.h>
 #include <string>
 #include <iomanip>
@@ -20,24 +21,25 @@ using namespace std;
 
 
 int main() {
+    //initialize and define default values for variables used
     char userSelection = '0';
     double userInitialInvestAmt = 0.00;
     double userMonthlyDeposit = 0.00;
     double userAnnualInterest = 0.00;
     int userNumOfYrs = 0;
-    double dblUserInput;
-    int intUserInput;
-    DisplayMenu newDisplay;
+    DisplayMenu newDisplay;     // initializes DisplayMenu object
     
 
     newDisplay.emptyMenu();
     cin >> userSelection;
     
+    // quits program if user enters 'q'
     if (userSelection == 'q') {
         cout << "Goodbye." << endl;
         return 0;
     }
 
+    // loops through gathering user input that is used to calculate compounding interest accounts
     while (userSelection != 'q') {
         cout << "Enter the initial investment amount: $ ";
         cin >> userInitialInvestAmt;
@@ -53,96 +55,62 @@ int main() {
 
         cout << endl;
 
-        auto User1 = std::make_unique<UserCalc>(userNumOfYrs, userInitialInvestAmt, userMonthlyDeposit, userAnnualInterest);
-
         newDisplay.populatedMenu(userInitialInvestAmt, userMonthlyDeposit, userAnnualInterest, userNumOfYrs);
 
-        cin >> userSelection;
-        if (userSelection == 'q') {
-            cout << "Goodbye." << endl;
-            return 0;
+        
+        cin >> userSelection;   // user input based on the question of whether their input is correct
+
+        // while loop to catch any entries that aren't 'y' or 'n'
+        while (userSelection != 'y' && userSelection != 'n') {
+                cout << "Please choose 'y' or 'n'." << endl;
+                cin >> userSelection;
         }
 
-        User1->getCalcOutput();
-    }
-
-
-
-    /*
-    while (userSelection != 'q') {
-        newDisplay.emptyMenu();
-
-        cout << "Enter the initial investment amount: $ ";
-        cin >> dblUserInput;
-        if (cin.fail()) {
-            cout << "Invalid input. Please enter numbers only." << endl;
-        }
-        //data type validation
-        while (cin.fail()) {
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');;
+        // if user selects 'n', ask for their input numbers again
+        while (userSelection == 'n') {
             cout << "Enter the initial investment amount: $ ";
-            cin >> dblUserInput;
-        }
-        newDisplay.setInvestAmt(dblUserInput);
+            cin >> userInitialInvestAmt;
 
-
-
-        cout << "Enter the monthly deposit amout: $ ";
-        cin >> dblUserInput;
-        if (cin.fail()) {
-            cout << "Invalid input. Please enter numbers only." << endl;
-        }
-        //data type validation
-        while (cin.fail()) {
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');;
             cout << "Enter the monthly deposit amout: $ ";
-            cin >> dblUserInput;
-        }
-        newDisplay.setMonthDeposit(dblUserInput);
+            cin >> userMonthlyDeposit;
 
-        cout << "Enter the annual interest rate: % ";
-        cin >> dblUserInput;
-        if (cin.fail()) {
-            cout << "Invalid input. Please enter numbers only." << endl;
-        }
-        //data type validation
-        while (cin.fail()) {
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');;
             cout << "Enter the annual interest rate: % ";
-            cin >> dblUserInput;
-        }
-        newDisplay.setAnnualInterest(dblUserInput);
+            cin >> userAnnualInterest;
 
-
-        cout << "Enter the number of years: ";
-        cin >> intUserInput;
-        //if (cin.fail()) {
-        //    cout << "Invalid input. Please enter numbers only." << endl;
-       // }
-        //data type validation
-        while (cin.fail()) {
-            if (intUserInput == 'q') {
-                cout << "User has chosen to quit program. Goodbye.";
-                return 1;
-            }
-            cout << "Invalid input. Please enter numbers only." << endl;
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
             cout << "Enter the number of years: ";
-            cin >> intUserInput;
+            cin >> userNumOfYrs;
+
+            cout << endl;
+            newDisplay.populatedMenu(userInitialInvestAmt, userMonthlyDeposit, userAnnualInterest, userNumOfYrs);
+            cin >> userSelection;
+
+            // breaks out of while loop if the user selects 'y' to confirm their input values
+            if (userSelection == 'y') {
+                break;
+            }
+            // else trigger a while loop to get either 'y' or 'n'
+            else {
+                while (userSelection != 'y' && userSelection != 'n') {
+                    cout << "Please choose 'y' or 'n'." << endl;
+                    cin >> userSelection;
+                }
+            }
         }
-        newDisplay.setNumYears(intUserInput);
 
-        newDisplay.populatedMenu();
+        // creates new UserCalc object
+        auto User1 = make_unique<UserCalc>(userNumOfYrs, userInitialInvestAmt, userMonthlyDeposit, userAnnualInterest);
 
+        // calls the getCalcOutput() function to calculate and output the compounding interest tables.
+        User1->getCalcOutput();
+
+        // asks the user if they would like to run another account simulation. Exits program if they enter 'n'.
+        cout << "Would you like to simulate another account? (y/n)" << endl;
         cin >> userSelection;
-
+        if (userSelection == 'n') {
+            cout << "Goodbye.";
+            userSelection = 'q';
+        }
     }
-    */
-
 
     return 0;
 }
